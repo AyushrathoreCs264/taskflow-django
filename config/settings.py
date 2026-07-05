@@ -25,7 +25,11 @@ SECRET_KEY = "django-insecure-5ir!41$x^guaz(tqx%ye2@cavphivl2xq1%2l)jy8o*a^8+^-e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "taskflow-django-bsp2.onrender.com",
+]
 
 
 # Application definition
