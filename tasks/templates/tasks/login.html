@@ -1,0 +1,35 @@
+{% extends "tasks/base.html" %}
+{% block starts %}
+  
+
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-4 shadow-lg" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Login</h2>
+
+        {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+        <hr>
+ 
+        <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">username</label>
+    <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+  </div>
+
+  <p> do not have an account? <a href="/register/">Register here</a> </p>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+    {% endblock %}

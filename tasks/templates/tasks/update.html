@@ -1,0 +1,52 @@
+{% extends "tasks/base.html" %}
+{% block starts %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Task</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">Update Task</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+<div class="mb-3">
+            <input
+                type="text"
+                name="title"
+                class="form-control"
+                value="{{ task.title }}"
+                placeholder="Enter Task"
+            >
+            <input 
+               type="date"
+               name="due_date"
+               value="{{ task.due_date|date:'Y-m-d' }}"
+               class="form-control mt-3">
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Update
+        </button>
+
+        <a href="{% url 'home' %}" class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+</body>
+</html>     
+    {% endblock %}   

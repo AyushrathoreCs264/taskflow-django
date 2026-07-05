@@ -1,0 +1,200 @@
+{% extends 'tasks/base.html' %}
+
+{% block starts %}
+    
+
+    <!-- Add Task -->
+    <form method="POST" class="mb-4">
+
+    {% csrf_token %}
+
+    <div class="input-group shadow-sm">
+
+        <input
+            type="text"
+            name="title"
+            class="form-control"
+            placeholder="Enter a new task">
+
+        <input
+            type="date"
+            name="due_date"
+            class="form-control">
+
+        <button class="btn btn-success">
+            Add Task
+        </button>
+
+    </div>
+
+</form>
+
+<div class="row g-4 mb-4">
+
+    <!-- Total -->
+    <div class="col-md-3">
+        <div class="card dashboard-card bg-primary text-white">
+            <div class="card-body">
+                <h6>📋 Total Tasks</h6>
+                <h2 class="fw-bold">{{ total_tasks }}</h2>
+                <small>Manage all your tasks</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Completed -->
+    <div class="col-md-3">
+        <div class="card dashboard-card bg-success text-white">
+            <div class="card-body">
+                <h6>✅ Completed</h6>
+                <h2 class="fw-bold">{{ completed_tasks }}</h2>
+                <small>Great work!</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending -->
+    <div class="col-md-3">
+        <div class="card dashboard-card bg-warning text-dark">
+            <div class="card-body">
+                <h6>⏳ Pending</h6>
+                <h2 class="fw-bold">{{ pending_tasks }}</h2>
+                <small>Keep going</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="col-md-3">
+        <div class="card dashboard-card bg-dark text-white">
+            <div class="card-body">
+                <h6>📈 Progress</h6>
+                <h2 class="fw-bold">{{ completion_percentage }}%</h2>
+                <small>Completion Rate</small>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<a href="?search={{ request.GET.search }}"
+   class="btn {% if not request.GET.filter %}btn-dark{% else %}btn-secondary{% endif %}">
+    All
+</a>
+
+<a href="?search={{ request.GET.search }}&filter=pending"
+   class="btn {% if request.GET.filter == 'pending' %}btn-warning{% else %}btn-outline-warning{% endif %}">
+    Pending
+</a>
+
+<a href="?search={{ request.GET.search }}&filter=completed"
+   class="btn {% if request.GET.filter == 'completed' %}btn-success{% else %}btn-outline-success{% endif %}">
+    Completed
+</a>
+
+<a href="?search={{ request.GET.search }}&filter=overdue"
+   class="btn {% if request.GET.filter == 'overdue' %}btn-danger{% else %}btn-outline-danger{% endif %}">
+    Overdue
+</a>
+    <!-- Tasks -->
+
+    {% for task in tasks %}
+
+<div class="card task-card mb-4">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h4 class="mb-2">
+
+                    {% if task.completed %}
+                        ✅ {{ task.title }}
+                    {% else %}
+                        📌 {{ task.title }}
+                    {% endif %}
+
+                </h4>
+
+                {% if task.due_date %}
+
+                    <p class="text-muted mb-1">
+                        📅 Due: {{ task.due_date }}
+                    </p>
+
+                    <small>
+
+                        {% if task.completed %}
+                            <span class="text-success">
+                                ✅ Completed
+                            </span>
+
+                        {% else %}
+                            {{ task.status }}
+                        {% endif %}
+
+                    </small>
+
+                {% endif %}
+
+            </div>
+
+            <div>
+
+                {% if task.completed %}
+
+                    <span class="badge bg-success px-3 py-2">
+                        Completed
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-warning text-dark px-3 py-2">
+                        Pending
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="text-end">
+
+            <a href="{% url 'complete' task.id %}"
+               class="btn btn-success btn-sm me-2">
+
+                {% if task.completed %}
+                    ↩ Undo
+                {% else %}
+                    ✓ Complete
+                {% endif %}
+
+            </a>
+
+            <a href="{% url 'update' task.id %}"
+               class="btn btn-primary btn-sm me-2">
+
+                ✏ Edit
+
+            </a>
+
+            <a href="{% url 'delete' task.id %}"
+               class="btn btn-danger btn-sm">
+
+                🗑 Delete
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+    {% endblock %}

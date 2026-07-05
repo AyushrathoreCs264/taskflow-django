@@ -1,0 +1,210 @@
+/* ===========================
+   Global Styles
+=========================== */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f7fc;
+    color: #1f2937;
+}
+
+/* Main Container */
+.container {
+    max-width: 1100px;
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.card {
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.btn {
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* ===========================
+   Input Fields
+=========================== */
+
+.form-control {
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+}
+
+.form-control:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+}
+
+/* ===========================
+   Badges
+=========================== */
+
+.badge {
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* ===========================
+   Progress Bar
+=========================== */
+
+.progress {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    font-weight: 600;
+}
+
+
+/* ===========================
+   Navbar
+=========================== */
+
+.navbar {
+    background: white !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.navbar-brand {
+    color: #4f46e5 !important;
+    font-weight: 700;
+}
+
+.navbar-brand:hover {
+    color: #4338ca !important;
+}
+
+.navbar .form-control {
+    min-width: 250px;
+}
+
+/* ===========================
+   Dashboard Cards
+=========================== */
+
+.dashboard-card{
+    border:none;
+    border-radius:20px;
+    transition:all .3s ease;
+}
+
+.dashboard-card .card-body{
+    padding:28px;
+}
+
+.dashboard-card h6{
+    font-size:.95rem;
+    opacity:.9;
+}
+
+.dashboard-card h2{
+    font-size:2.3rem;
+    margin:10px 0;
+}
+
+.dashboard-card small{
+    opacity:.8;
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.18);
+
+}
+
+/* ===========================
+   Task Cards
+=========================== */
+
+.task-card{
+
+    border:none;
+
+    border-radius:20px;
+
+    transition:.35s;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+/* Blue accent */
+
+.task-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:6px;
+
+    height:100%;
+
+    background:#4f46e5;
+
+}
+
+.task-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+
+}
+
+.task-card h4{
+
+    font-weight:600;
+
+}
+
+.task-card p{
+
+    margin-bottom:4px;
+
+}
+
+.task-card hr{
+
+    opacity:.15;
+
+}
+
+.task-card .btn{
+
+    border-radius:10px;
+
+}

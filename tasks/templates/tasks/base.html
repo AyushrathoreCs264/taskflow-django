@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">      
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold fs-3 d-flex align-items-center"
+   href="{% url 'home' %}">
+
+    <span class="me-2">🎯</span>
+
+    <span class="text-primary">TaskFlow</span>
+
+    <small class="text-muted fs-6 ms-3 fst-italic">
+        Organize Today. Achieve Tomorrow.
+    </small>
+
+</a>
+
+    {% if request.user.is_authenticated %}
+
+    <div class="d-flex align-items-center ms-auto">
+
+        <!-- Search + Sort -->
+        <form method="GET"
+              action="{% url 'home' %}"
+              class="d-flex align-items-center me-3 gap-2">
+
+            <!-- Search Box -->
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="🔍 Search tasks..."
+                value="{{ request.GET.search }}">
+
+            <!-- Search Button -->
+            <button class="btn btn-primary">
+                Search
+            </button>    
+
+            <!-- Preserve Filter -->
+            <input type="hidden" name="filter" value="{{ request.GET.filter }}">
+
+            <!-- Sort -->
+            <select name="sort"
+                    class="form-select"
+                    onchange="this.form.submit()">
+
+                <option value="">Sort By</option>
+
+                <option value="newest"
+                    {% if request.GET.sort == "newest" %}selected{% endif %}>
+                    Newest
+                </option>
+
+                <option value="oldest"
+                    {% if request.GET.sort == "oldest" %}selected{% endif %}>
+                    Oldest
+                </option>
+
+                <option value="due"
+                    {% if request.GET.sort == "due" %}selected{% endif %}>
+                    Due Date
+                </option>
+
+                <option value="az"
+                    {% if request.GET.sort == "az" %}selected{% endif %}>
+                    A-Z
+                </option>
+
+                <option value="za"
+                    {% if request.GET.sort == "za" %}selected{% endif %}>
+                    Z-A
+                </option>
+
+            </select>
+
+        </form>
+
+        <!-- Logout -->
+        <a href="{% url 'logout_page' %}"
+           class="btn btn-outline-danger">
+            Logout
+        </a>
+
+    </div>
+
+    {% else %}
+
+    <a href="{% url 'login_page' %}"
+       class="btn btn-primary ms-auto">
+        Login
+    </a>
+
+    {% endif %}
+
+</div>
+
+           
+
+</nav>
+
+<div class="container mt-5">
+    {% block starts %}
+    {% endblock %}
+</div>
+
+<footer class="text-center py-3 mt-5 border-top text-muted">
+    Developed with ❤️ by <strong>Ayush Rathore</strong>
+</footer>
+
+</body>
+</html>
